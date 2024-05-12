@@ -12,10 +12,7 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import java.util.Set;
-import lombok.Builder;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
+import lombok.*;
 
 @Entity
 @Table(name = "product")
@@ -23,6 +20,8 @@ import lombok.ToString;
 @Builder
 @ToString(exclude = "orders")
 @EqualsAndHashCode(exclude = "orders")
+@NoArgsConstructor // Adiciona um construtor padrão sem argumentos
+@AllArgsConstructor // Mantém o construtor com todos os argumentos
 public class Product {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -42,5 +41,5 @@ public class Product {
       name = "item_order",
       joinColumns = @JoinColumn(name = "product_id"),
       inverseJoinColumns = @JoinColumn(name = "order_id"))
-  Set<Order> orders;
+  Set<Orders> orders;
 }

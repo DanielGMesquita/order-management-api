@@ -7,7 +7,7 @@ Required: Java 17
 
 ```bash
 # clone repository
-git clone git@github.com:DanielGMesquita/order-management-api.git
+git clone git@github.com:DanielGMesquita/orders-management-api.git
 
 # run the project
 ./mvnw spring-boot:run

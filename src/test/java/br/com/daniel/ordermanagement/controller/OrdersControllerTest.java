@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
 
 import br.com.daniel.ordermanagement.TestMocks;
-import br.com.daniel.ordermanagement.entity.Order;
+import br.com.daniel.ordermanagement.entity.Orders;
 import br.com.daniel.ordermanagement.service.OrderService;
 import java.util.Arrays;
 import java.util.List;
@@ -19,17 +19,17 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.server.ResponseStatusException;
 
-class OrderControllerTest {
+class OrdersControllerTest {
 
   @Mock private OrderService orderService;
 
   @InjectMocks private OrderController orderController;
 
-  private final Order firstOrder = TestMocks.firstOrder;
+  private final Orders firstOrder = TestMocks.firstOrder;
 
-  private final Order secondOrder = TestMocks.secondOrder;
+  private final Orders secondOrder = TestMocks.secondOrder;
 
-  private List<Order> orders;
+  private List<Orders> orders;
 
   @BeforeEach
   void setUp() {
@@ -40,7 +40,7 @@ class OrderControllerTest {
   @Test
   void testGetAll() {
     when(this.orderService.findAll()).thenReturn(this.orders);
-    ResponseEntity<List<Order>> result = this.orderController.getAll();
+    ResponseEntity<List<Orders>> result = this.orderController.getAll();
     assertEquals(this.orders, result.getBody());
     assertEquals(HttpStatus.OK, result.getStatusCode());
   }
@@ -56,7 +56,7 @@ class OrderControllerTest {
   void testGetById() {
     when(this.orderService.findById(1)).thenReturn(this.firstOrder);
 
-    ResponseEntity<Order> responseEntity = this.orderController.getById(1);
+    ResponseEntity<Orders> responseEntity = this.orderController.getById(1);
 
     assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
     assertEquals(this.firstOrder, responseEntity.getBody());
@@ -73,7 +73,7 @@ class OrderControllerTest {
   void testSave() {
     when(this.orderService.save(this.firstOrder)).thenReturn(this.firstOrder);
 
-    ResponseEntity<Order> responseEntity = this.orderController.save(this.firstOrder);
+    ResponseEntity<Orders> responseEntity = this.orderController.save(this.firstOrder);
 
     assertEquals(HttpStatus.CREATED, responseEntity.getStatusCode());
     assertEquals(this.firstOrder, responseEntity.getBody());
@@ -83,7 +83,7 @@ class OrderControllerTest {
   void testUpdate() {
     when(this.orderService.update(1, this.firstOrder)).thenReturn(this.firstOrder);
 
-    ResponseEntity<Order> responseEntity = this.orderController.update(1, this.firstOrder);
+    ResponseEntity<Orders> responseEntity = this.orderController.update(1, this.firstOrder);
 
     assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
     assertEquals(this.firstOrder, responseEntity.getBody());

@@ -9,10 +9,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.util.List;
-import lombok.Builder;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
+import lombok.*;
 
 @Entity
 @Table(name = "category")
@@ -20,6 +17,8 @@ import lombok.ToString;
 @Builder
 @ToString(exclude = "productList")
 @EqualsAndHashCode(exclude = "productList")
+@NoArgsConstructor // Adiciona um construtor padrão sem argumentos
+@AllArgsConstructor // Mantém o construtor com todos os argumentos
 public class Category {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)

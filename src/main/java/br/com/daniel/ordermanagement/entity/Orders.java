@@ -9,18 +9,17 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import java.time.LocalDateTime;
 import java.util.Set;
-import lombok.Builder;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
+import lombok.*;
 
 @Entity
-@Table(name = "order")
+@Table(name = "order_table")
 @Data
 @Builder
 @ToString(exclude = "products")
 @EqualsAndHashCode(exclude = "products")
-public class Order {
+@NoArgsConstructor // Adiciona um construtor padrão sem argumentos
+@AllArgsConstructor // Mantém o construtor com todos os argumentos
+public class Orders {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "order_id")

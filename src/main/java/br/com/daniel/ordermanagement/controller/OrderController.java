@@ -1,6 +1,6 @@
 package br.com.daniel.ordermanagement.controller;
 
-import br.com.daniel.ordermanagement.entity.Order;
+import br.com.daniel.ordermanagement.entity.Orders;
 import br.com.daniel.ordermanagement.service.OrderService;
 import java.util.List;
 import org.springframework.http.HttpStatus;
@@ -27,8 +27,8 @@ public class OrderController {
   private static final String ORDER_NOT_FOUND = "Order not found";
 
   @GetMapping
-  public ResponseEntity<List<Order>> getAll() {
-    List<Order> orders = this.service.findAll();
+  public ResponseEntity<List<Orders>> getAll() {
+    List<Orders> orders = this.service.findAll();
     if (orders.isEmpty()) {
       throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No orders found in the database");
     }
@@ -36,27 +36,27 @@ public class OrderController {
   }
 
   @GetMapping("/{id}")
-  public ResponseEntity<Order> getById(@PathVariable Integer id) {
-    Order order = this.service.findById(id);
-    if (order == null) {
+  public ResponseEntity<Orders> getById(@PathVariable Integer id) {
+    Orders orders = this.service.findById(id);
+    if (orders == null) {
       throw new ResponseStatusException(HttpStatus.NOT_FOUND, ORDER_NOT_FOUND);
     }
-    return new ResponseEntity<>(order, HttpStatus.OK);
+    return new ResponseEntity<>(orders, HttpStatus.OK);
   }
 
   @PostMapping("/create")
-  public ResponseEntity<Order> save(Order order) {
-    Order savedOrder = this.service.save(order);
-    return new ResponseEntity<>(savedOrder, HttpStatus.CREATED);
+  public ResponseEntity<Orders> save(Orders orders) {
+    Orders savedOrders = this.service.save(orders);
+    return new ResponseEntity<>(savedOrders, HttpStatus.CREATED);
   }
 
   @PutMapping("/update/{id}")
-  public ResponseEntity<Order> update(@PathVariable Integer id, @RequestBody Order order) {
-    Order updatedOrder = this.service.update(id, order);
-    if (updatedOrder == null) {
+  public ResponseEntity<Orders> update(@PathVariable Integer id, @RequestBody Orders orders) {
+    Orders updatedOrders = this.service.update(id, orders);
+    if (updatedOrders == null) {
       throw new ResponseStatusException(HttpStatus.NOT_FOUND, ORDER_NOT_FOUND);
     }
-    return new ResponseEntity<>(updatedOrder, HttpStatus.OK);
+    return new ResponseEntity<>(updatedOrders, HttpStatus.OK);
   }
 
   @DeleteMapping("/delete/{id}")
