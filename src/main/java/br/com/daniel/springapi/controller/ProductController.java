@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 @RestController
-@RequestMapping("/product")
+@RequestMapping("/products")
 public class ProductController {
   private final ProductService service;
   private static final String PRODUCT_NOT_FOUND = "Product not found";
@@ -43,13 +43,13 @@ public class ProductController {
     return ResponseEntity.ok(product);
   }
 
-  @PostMapping
+  @PostMapping("/create")
   public ResponseEntity<Product> save(@RequestBody Product product) {
     Product savedProduct = this.service.save(product);
     return ResponseEntity.status(HttpStatus.CREATED).body(savedProduct);
   }
 
-  @PutMapping("/{id}")
+  @PutMapping("/update/{id}")
   public ResponseEntity<Product> update(@PathVariable Integer id, @RequestBody Product product) {
     Product updatedProduct = this.service.updateProduct(id, product);
     if (updatedProduct == null) {
@@ -58,7 +58,7 @@ public class ProductController {
     return ResponseEntity.ok(updatedProduct);
   }
 
-  @DeleteMapping("/{id}")
+  @DeleteMapping("/delete/{id}")
   public ResponseEntity<Boolean> delete(@PathVariable Integer id) {
     Boolean deleted = this.service.deleteProduct(id);
     if (Boolean.FALSE.equals(deleted)) {

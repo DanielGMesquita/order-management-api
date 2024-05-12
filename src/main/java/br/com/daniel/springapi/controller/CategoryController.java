@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 @RestController
-@RequestMapping("/category")
+@RequestMapping("/categories")
 public class CategoryController {
   private final CategoryService service;
   private static final String CATEGORY_NOT_FOUND = "Category not found";
@@ -44,13 +44,13 @@ public class CategoryController {
     return new ResponseEntity<>(category, HttpStatus.OK);
   }
 
-  @PostMapping
+  @PostMapping("/create")
   public ResponseEntity<Category> save(@RequestBody Category category) {
     Category savedCategory = this.service.save(category);
     return new ResponseEntity<>(savedCategory, HttpStatus.CREATED);
   }
 
-  @PutMapping("/{id}")
+  @PutMapping("update/{id}")
   public ResponseEntity<Category> update(@PathVariable Integer id, @RequestBody Category category) {
     Category updatedCategory = this.service.update(id, category);
     if (updatedCategory == null) {
@@ -59,7 +59,7 @@ public class CategoryController {
     return new ResponseEntity<>(updatedCategory, HttpStatus.OK);
   }
 
-  @DeleteMapping("/{id}")
+  @DeleteMapping("/delete/{id}")
   public ResponseEntity<Boolean> delete(@PathVariable Integer id) {
     Boolean deleted = this.service.deleteCategory(id);
     if (Boolean.FALSE.equals(deleted)) {

@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 @RestController
-@RequestMapping("/order")
+@RequestMapping("/orders")
 public class OrderController {
   private final OrderService service;
 
@@ -44,13 +44,13 @@ public class OrderController {
     return new ResponseEntity<>(order, HttpStatus.OK);
   }
 
-  @PostMapping
+  @PostMapping("/create")
   public ResponseEntity<Order> save(Order order) {
     Order savedOrder = this.service.save(order);
     return new ResponseEntity<>(savedOrder, HttpStatus.CREATED);
   }
 
-  @PutMapping("/{id}")
+  @PutMapping("/update/{id}")
   public ResponseEntity<Order> update(@PathVariable Integer id, @RequestBody Order order) {
     Order updatedOrder = this.service.update(id, order);
     if (updatedOrder == null) {
@@ -59,7 +59,7 @@ public class OrderController {
     return new ResponseEntity<>(updatedOrder, HttpStatus.OK);
   }
 
-  @DeleteMapping("/{id}")
+  @DeleteMapping("/delete/{id}")
   public ResponseEntity<Boolean> delete(@PathVariable Integer id) {
     Boolean deleted = this.service.deleteOrder(id);
     if (Boolean.FALSE.equals(deleted)) {
