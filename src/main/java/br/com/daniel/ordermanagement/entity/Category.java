@@ -17,8 +17,8 @@ import lombok.*;
 @Builder
 @ToString(exclude = "productList")
 @EqualsAndHashCode(exclude = "productList")
-@NoArgsConstructor // Adiciona um construtor padrão sem argumentos
-@AllArgsConstructor // Mantém o construtor com todos os argumentos
+@NoArgsConstructor
+@AllArgsConstructor
 public class Category {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)

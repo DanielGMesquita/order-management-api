@@ -20,8 +20,8 @@ import lombok.*;
 @Builder
 @ToString(exclude = "orders")
 @EqualsAndHashCode(exclude = "orders")
-@NoArgsConstructor // Adiciona um construtor padrão sem argumentos
-@AllArgsConstructor // Mantém o construtor com todos os argumentos
+@NoArgsConstructor
+@AllArgsConstructor
 public class Product {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
